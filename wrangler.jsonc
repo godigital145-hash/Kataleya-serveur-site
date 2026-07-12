@@ -1,0 +1,38 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "la-kataleya-serveur-admin",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "dev": {
+    "port": 8788
+  },
+  "assets": {
+    "directory": "../dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
+  },
+  "d1_databases": [
+    {
+      "binding": "kataleya_admin_db",
+      "database_name": "kataleya-admin-db",
+      "database_id": "5bb1a525-3c13-4daa-8ca2-4c696d1d1df3"
+    }
+  ],
+  "vars": {
+    "ADMIN_PASSWORD": "admin1234",
+    "ADMIN_SESSION_SECRET": "kataleya_admin_serveur"
+  },
+  "r2_buckets": [
+    {
+      "bucket_name": "kataleya-admin-bucket",
+      "binding": "kataleya_admin_bucket",
+      "remote": true
+    }
+  ]
+}
