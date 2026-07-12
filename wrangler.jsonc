@@ -12,11 +12,6 @@
   "dev": {
     "port": 8788
   },
-  "assets": {
-    "directory": "../dist",
-    "binding": "ASSETS",
-    "not_found_handling": "404-page"
-  },
   "d1_databases": [
     {
       "binding": "kataleya_admin_db",
