@@ -1,4 +1,5 @@
 import { Hono, type Context } from "hono";
+import { cors } from "hono/cors";
 import { getCookie, setCookie, deleteCookie } from "hono/cookie";
 import { initTravauxTables, initCataloguesTables, initProduitsTables, initKataleyaConfigTable } from "../utils/tables";
 
@@ -27,6 +28,14 @@ async function ensureDb(env: Bindings) {
     });
     return dbReady;
 }
+
+app.use(
+    "*",
+    cors({
+        origin: (origin) => origin,
+        credentials: true,
+    })
+);
 
 app.use("*", async (c, next) => {
     await ensureDb(c.env);
@@ -76,7 +85,7 @@ app.post("/api/admin/login", async (c) => {
     setCookie(c, SESSION_COOKIE, token, {
         httpOnly: true,
         secure: true,
-        sameSite: "Lax",
+        sameSite: "None",
         path: "/",
         maxAge: 60 * 60 * 8,
     });
